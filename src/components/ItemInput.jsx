@@ -1,22 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 
-const ItemInput = () => {
-  const [inputs, setInputs] = useState({
-    name: '',
-    category: '',
-    price: '',
-    source: '',
-    quantity: '',
-    comments: '',
-    breakeven: '',
-    asin: ''
-  });
-
-  const handleInput = (e, key) => {
-    setInputs({ ...inputs, [key]: e.target.value });
-    console.log("INPUTS", inputs)
-  };
+const ItemInput = ({ handleInput }) => {
 
   return (
     <InputContainer>
