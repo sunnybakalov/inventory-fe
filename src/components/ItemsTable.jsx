@@ -13,7 +13,7 @@ const ItemsTable = (props) => {
         <th>Breakeven</th>
         <th>ASIN</th>
       </tr>
-      {props.rows.map(item => {
+      {props.rows ? props.rows.map(item => {
         return (
           <tr>
             <td>{item.name}</td>
@@ -26,7 +26,7 @@ const ItemsTable = (props) => {
             <td>{item.asin}</td>
           </tr>
         );
-      })}
+      }) : '' }
     </table>
   )
 };
