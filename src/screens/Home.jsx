@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import ItemInput from '../components/ItemInput';
 import ItemsTable from '../components/ItemsTable';
+import { SubmitButton } from '../components/Buttons';
 
 const Home = () => {
   // const [rows, setRows] = useState([
@@ -46,12 +48,20 @@ const Home = () => {
       <ItemInput
         handleInput={handleInput}
       />
-      <button onClick={e => handleSubmit(e)}>
-        Submit
-      </button>
+      <ButtonContainer>
+        <SubmitButton onClick={e => handleSubmit(e)}>
+          Submit
+        </SubmitButton>
+      </ButtonContainer>
       <ItemsTable rows={rows}/>
     </>
   );
 };
 
 export default Home;
+
+const ButtonContainer = styled.div`
+  margin: auto;
+  width: 50%;
+  text-align: center;
+`;
