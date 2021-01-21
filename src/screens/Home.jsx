@@ -90,15 +90,15 @@ const Home = () => {
         <h1>Inventory</h1>
       </nav>
       <h3>Add New Item</h3>
-      <ItemInput
+      {/* <ItemInput
         handleInput={handleInput}
       />
       <ButtonContainer>
         <SubmitButton onClick={e => handleSubmit(e)}>
           Submit
         </SubmitButton>
-      </ButtonContainer>
-      <ItemsTable rows={rows}/>
+      </ButtonContainer> */}
+      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} />
     </>
   );
 };
