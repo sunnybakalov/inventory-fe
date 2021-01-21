@@ -46,8 +46,7 @@ export default ItemInput;
 const InputContainer = styled.div`
   display: flex;
   flex-direction: row;
-  width: 80%;
-  margin: auto;
+  justify-content: space-evenly;
 
   p {
     margin: 0;
