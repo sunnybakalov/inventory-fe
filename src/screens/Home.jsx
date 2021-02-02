@@ -73,10 +73,22 @@ const Home = () => {
     } else {
       setErrors({});
       addRow(inputs);
+      setInputs({
+        name: '',
+        category: '',
+        price: '',
+        source: '',
+        quantity: '',
+        comments: '',
+        breakeven: '',
+        asin: ''
+      });
     }
-    console.log("ERRORS", inputErrors)
-    console.log("HAS ERRORS", hasErrors)
-    console.log("ROWS", rows)
+  };
+
+  const handleDelete = (item) => {
+    const filtered = rows.filter(row => row.name !== item.name);
+    setRows(filtered);
   };
 
   const addRow = (input) => {
@@ -98,7 +110,7 @@ const Home = () => {
           Submit
         </SubmitButton>
       </ButtonContainer> */}
-      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} />
+      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
     </>
   );
 };

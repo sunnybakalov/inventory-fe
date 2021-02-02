@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from '../components/Buttons';
 
-const ItemsTable = ({ handleInput, handleSubmit, rows }) => {
+const ItemsTable = ({ handleDelete, handleInput, handleSubmit, rows }) => {
   return (
     <Table>
       <Row>
@@ -58,7 +58,7 @@ const ItemsTable = ({ handleInput, handleSubmit, rows }) => {
             <TableData>{item.comments}</TableData>
             <TableData>{item.breakeven}</TableData>
             <TableData>{item.asin}</TableData>
-            <TableData><button>Click Me</button></TableData>
+            <TableData><button onClick={(() => handleDelete(item))}>Delete</button></TableData>
           </Row>
         );
       }) : '' }
