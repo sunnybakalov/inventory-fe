@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import { SubmitButton } from '../components/Buttons';
 
-const ItemsTable = ({ handleDelete, handleInput, handleSubmit, rows }) => {
+const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) => {
   return (
     <Table>
       <Row>
@@ -18,28 +18,74 @@ const ItemsTable = ({ handleDelete, handleInput, handleSubmit, rows }) => {
       </Row>
       <Row>
         <TableData>
-          <input onChange={e => handleInput(e, 'name')} />
+          <InputDiv>
+            <Input
+              onChange={e => handleInput(e, 'name')}
+              error={ errors.name ? true : false }
+            />
+            {errors.name &&
+              <span>{errors.name}</span>
+            }
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'category')} />
+          <InputDiv>
+            <Input
+              onChange={e => handleInput(e, 'category')}
+              error={ errors.category ? true : false }
+              />
+            {errors.category &&
+              <span>{errors.category}</span>
+            }
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'price')} />
+          <InputDiv>
+            <Input
+              onChange={e => handleInput(e, 'price')}
+              error={ errors.price ? true : false }
+              />
+            {errors.price &&
+              <span>{errors.price}</span>
+            }
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'source')} />
+          <InputDiv>
+            <Input
+              onChange={e => handleInput(e, 'source')}
+              error={ errors.source ? true : false }
+            />
+            {errors.source &&
+              <span>{errors.source}</span>
+            }
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'quantity')} />
+          <InputDiv>
+            <Input
+              onChange={e => handleInput(e, 'quantity')}
+              error={ errors.quantity ? true : false }
+            />
+            {errors.quantity &&
+              <span>{errors.quantity}</span>
+            }
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'comments')} />
+          <InputDiv>
+            <Input onChange={e => handleInput(e, 'comments')} />
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'breakeven')} />
+          <InputDiv>
+            <Input onChange={e => handleInput(e, 'breakeven')} />
+          </InputDiv>
         </TableData>
         <TableData>
-          <input onChange={e => handleInput(e, 'asin')} />
+          <InputDiv>
+            <Input onChange={e => handleInput(e, 'asin')} />
+          </InputDiv>
         </TableData>
         <TableData>
           <SubmitButton onClick={handleSubmit}>
@@ -68,6 +114,13 @@ const ItemsTable = ({ handleDelete, handleInput, handleSubmit, rows }) => {
 
 export default ItemsTable;
 
+const inputBorderColor = props => {
+  if (props.error) {
+    return '2px solid red';
+  }
+  return '2px solid #e4e9f0';
+};
+
 const Table = styled.table`
   width: 80%;
   margin: auto;
@@ -87,4 +140,31 @@ const TableHeading = styled.th`
 
 const TableData = styled.td`
   border: 1px solid grey;
+`;
+
+const Input = styled.input`
+  height: 30px;
+  max-width: 150px;
+  border: ${props => inputBorderColor(props)};
+  border-radius: 4px;
+  background-color: #ffffff;
+
+  &:focus {
+    outline: 0;
+    border-color: #4C76E0;
+  }
+  &::placeholder {
+    color: #333;
+  }
+`;
+
+const InputDiv = styled.div`
+  display: grid;
+  margin: 15px;
+
+  span {
+    color: red;
+    font-style: italic;
+    font-size: 10px;
+  }
 `;

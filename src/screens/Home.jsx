@@ -22,13 +22,7 @@ const Home = () => {
     breakeven: '',
     asin: ''
   });
-  const [errors, setErrors] = useState({
-    name: '',
-    category: '',
-    price: '',
-    source: '',
-    quantity: ''
-  });
+  const [errors, setErrors] = useState({});
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
@@ -112,7 +106,7 @@ const Home = () => {
           Submit
         </SubmitButton>
       </ButtonContainer> */}
-      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} handleDelete={handleDelete} />
+      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} handleDelete={handleDelete} errors={errors}/>
     </>
   );
 };
