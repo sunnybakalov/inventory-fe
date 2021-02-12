@@ -10,15 +10,7 @@ import {
   TableHeading
 } from '../components/styles';
 
-const ItemsTable = ({ errors, handleDelete, handleEdit, handleInput, handleSubmit, rows }) => {
-  const [edit, setEdit] = useState(false);
-  const [disabled, setDisabled]= useState(true);
-
-  const handleedit = item => {
-    setDisabled(false);
-    setEdit(!edit);
-    console.log("ITEM", item)
-  };
+const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) => {
 
   return (
     <Table>
@@ -116,8 +108,6 @@ const ItemsTable = ({ errors, handleDelete, handleEdit, handleInput, handleSubmi
           <TableRow
             item={item}
             handleDelete={handleDelete}
-            handleedit={handleedit}
-            disabled={disabled}
           />
           // <Row>
           //   <TableData>

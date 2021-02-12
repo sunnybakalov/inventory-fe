@@ -1,7 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Input, Row, TableData } from '../components/styles';
 
-const TableRow = ({ disabled, handleDelete, handleedit, item }) => {
+const TableRow = ({ handleDelete, item }) => {
+  const [disabled, setDisabled]= useState(true);
+  const [editing, setEditing] = useState(false);
+
+  const handleEdit = item => {
+    setDisabled(false);
+    setEditing(!editing);
+  };
   return (
     <Row>
       <TableData>
@@ -66,7 +73,7 @@ const TableRow = ({ disabled, handleDelete, handleedit, item }) => {
           </button>
         </TableData>
         <TableData>
-          <button onClick={(() => handleedit(item))}>
+          <button onClick={(() => handleEdit(item))}>
             Edit
           </button>
         </TableData>

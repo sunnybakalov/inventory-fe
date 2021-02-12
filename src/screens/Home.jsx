@@ -127,11 +127,6 @@ const Home = () => {
     setRows(filtered);
   };
 
-  const handleEdit = (item) => {
-    setIsEditing(!isEditing);
-    // console.log('ITEM', item);
-  };
-
   const addRow = (input) => {
     const newRows = [...rows, input];
     setRows(newRows);
@@ -148,7 +143,6 @@ const Home = () => {
         handleInput={handleInput}
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}
-        handleEdit={handleEdit}
         errors={errors}
       />
     </>
