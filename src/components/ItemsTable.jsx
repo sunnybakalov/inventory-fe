@@ -1,8 +1,25 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState } from 'react';
 import { SubmitButton } from '../components/Buttons';
+import TableRow from '../components/ItemTableRow';
+import {
+  Input,
+  InputDiv,
+  Row,
+  Table,
+  TableData,
+  TableHeading
+} from '../components/styles';
 
-const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) => {
+const ItemsTable = ({ errors, handleDelete, handleEdit, handleInput, handleSubmit, rows }) => {
+  const [edit, setEdit] = useState(false);
+  const [disabled, setDisabled]= useState(true);
+
+  const handleedit = item => {
+    setDisabled(false);
+    setEdit(!edit);
+    console.log("ITEM", item)
+  };
+
   return (
     <Table>
       <Row>
@@ -14,6 +31,7 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) =
         <TableHeading>Comments</TableHeading>
         <TableHeading>Breakeven</TableHeading>
         <TableHeading>ASIN</TableHeading>
+        <TableHeading></TableHeading>
         <TableHeading></TableHeading>
       </Row>
       <Row>
@@ -95,17 +113,72 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) =
       </Row>
       {rows ? rows.map(item => {
         return (
-          <Row>
-            <TableData>{item.name}</TableData>
-            <TableData>{item.category}</TableData>
-            <TableData>{item.price}</TableData>
-            <TableData>{item.source}</TableData>
-            <TableData>{item.quantity}</TableData>
-            <TableData>{item.comments}</TableData>
-            <TableData>{item.breakeven}</TableData>
-            <TableData>{item.asin}</TableData>
-            <TableData><button onClick={(() => handleDelete(item))}>Delete</button></TableData>
-          </Row>
+          <TableRow
+            item={item}
+            handleDelete={handleDelete}
+            handleedit={handleedit}
+            disabled={disabled}
+          />
+          // <Row>
+          //   <TableData>
+          //     <Input
+          //       value={item.name}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.category}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.price}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.source}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.quantity}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.comments}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.breakeven}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData>
+          //     <Input
+          //       value={item.asin}
+          //       disabled={disabled}
+          //       id="input"
+          //     />
+          //   </TableData>
+          //   <TableData><button onClick={(() => handleDelete(item))}>Delete</button></TableData>
+          //   <TableData><button onClick={(() => handleedit(item))}>Edit</button></TableData>
+          // </Row>
         );
       }) : '' }
     </Table>
@@ -113,58 +186,3 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) =
 };
 
 export default ItemsTable;
-
-const inputBorderColor = props => {
-  if (props.error) {
-    return '2px solid red';
-  }
-  return '2px solid #e4e9f0';
-};
-
-const Table = styled.table`
-  width: 80%;
-  margin: auto;
-`;
-
-const Row = styled.tr`
-  text-align: center;
-`;
-
-const TableHeading = styled.th`
-  padding: 12px 0;
-  text-align: center;
-  background-color: #4C76E0;
-  color: white;
-  border: 1px solid #ddd;
-`;
-
-const TableData = styled.td`
-  border: 1px solid grey;
-`;
-
-const Input = styled.input`
-  height: 30px;
-  max-width: 150px;
-  border: ${props => inputBorderColor(props)};
-  border-radius: 4px;
-  background-color: #ffffff;
-
-  &:focus {
-    outline: 0;
-    border-color: #4C76E0;
-  }
-  &::placeholder {
-    color: #333;
-  }
-`;
-
-const InputDiv = styled.div`
-  display: grid;
-  margin: 15px;
-
-  span {
-    color: red;
-    font-style: italic;
-    font-size: 10px;
-  }
-`;

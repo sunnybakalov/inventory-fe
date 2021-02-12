@@ -1,15 +1,54 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-import ItemInput from '../components/ItemInput';
 import ItemsTable from '../components/ItemsTable';
 import { SubmitButton } from '../components/Buttons';
 
 const Home = () => {
   const [rows, setRows] = useState([
-    { name: "hello", category: "asdf", price: "$12.12", source: "walmart", quantity: "4", comments: "Hello my name is", breakeven: "$15.14", asin: "1236345" },
-    { name: "world", category: "asdf", price: "$12.12", source: "walmart", quantity: "4", comments: "Hello my name is", breakeven: "$15.14", asin: "1236345" },
-    { name: "my", category: "asdf", price: "$12.12", source: "walmart", quantity: "4", comments: "Hello my name is", breakeven: "$15.14", asin: "1236345" },
-    { name: "name", category: "asdf", price: "$12.12", source: "walmart", quantity: "4", comments: "Hello my name is", breakeven: "$15.14", asin: "1236345" }
+    {
+      id: 1,
+      name: 'hello',
+      category: 'asdf',
+      price: '$12.12',
+      source: 'walmart',
+      quantity: '4',
+      comments: 'Hello my name is',
+      breakeven: '$15.14',
+      asin: '1236345',
+    },
+    {
+      id: 2,
+      name: 'world',
+      category: 'asdf',
+      price: '$12.12',
+      source: 'walmart',
+      quantity: '4',
+      comments: 'Hello my name is',
+      breakeven: '$15.14',
+      asin: '1236345',
+    },
+    {
+      id: 3,
+      name: 'my',
+      category: 'asdf',
+      price: '$12.12',
+      source: 'walmart',
+      quantity: '4',
+      comments: 'Hello my name is',
+      breakeven: '$15.14',
+      asin: '1236345',
+    },
+    {
+      id: 4,
+      name: 'name',
+      category: 'asdf',
+      price: '$12.12',
+      source: 'walmart',
+      quantity: '4',
+      comments: 'Hello my name is',
+      breakeven: '$15.14',
+      asin: '1236345',
+    },
   ]);
   // const [rows, setRows] = useState([]);
   const [inputs, setInputs] = useState({
@@ -20,15 +59,16 @@ const Home = () => {
     quantity: '',
     comments: '',
     breakeven: '',
-    asin: ''
+    asin: '',
   });
   const [errors, setErrors] = useState({});
+  const [isEditing, setIsEditing] = useState(false);
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
   };
 
-  const handleValidation = inputs => {
+  const handleValidation = (inputs) => {
     const numberRegex = /^[0-9\b]+$/;
     const inputErrors = {};
 
@@ -57,7 +97,7 @@ const Home = () => {
     const inputErrors = handleValidation(inputs);
     const hasErrors = Object.keys(inputErrors).length !== 0;
 
-    console.log("INPUT ERRORS", inputErrors)
+    console.log('INPUT ERRORS', inputErrors);
     if (hasErrors) {
       setErrors(inputErrors);
     } else {
@@ -66,7 +106,7 @@ const Home = () => {
         category: '',
         price: '',
         source: '',
-        quantity: ''
+        quantity: '',
       });
       addRow(inputs);
       setInputs({
@@ -77,14 +117,19 @@ const Home = () => {
         quantity: '',
         comments: '',
         breakeven: '',
-        asin: ''
+        asin: '',
       });
     }
   };
 
   const handleDelete = (item) => {
-    const filtered = rows.filter(row => row.name !== item.name);
+    const filtered = rows.filter((row) => row.id !== item.id);
     setRows(filtered);
+  };
+
+  const handleEdit = (item) => {
+    setIsEditing(!isEditing);
+    // console.log('ITEM', item);
   };
 
   const addRow = (input) => {
@@ -98,15 +143,14 @@ const Home = () => {
         <h1>Inventory</h1>
       </nav>
       <h3>Add New Item</h3>
-      {/* <ItemInput
+      <ItemsTable
+        rows={rows}
         handleInput={handleInput}
+        handleSubmit={handleSubmit}
+        handleDelete={handleDelete}
+        handleEdit={handleEdit}
+        errors={errors}
       />
-      <ButtonContainer>
-        <SubmitButton onClick={e => handleSubmit(e)}>
-          Submit
-        </SubmitButton>
-      </ButtonContainer> */}
-      <ItemsTable rows={rows} handleInput={handleInput} handleSubmit={handleSubmit} handleDelete={handleDelete} errors={errors}/>
     </>
   );
 };
