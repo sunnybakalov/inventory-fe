@@ -150,9 +150,3 @@ const Home = () => {
 };
 
 export default Home;
-
-const ButtonContainer = styled.div`
-  margin: auto;
-  width: 50%;
-  text-align: center;
-`;
