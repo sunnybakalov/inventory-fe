@@ -10,7 +10,7 @@ import {
   TableHeading
 } from '../components/styles';
 
-const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) => {
+const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, handleUpdate, rows }) => {
 
   return (
     <Table>
@@ -108,6 +108,9 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, rows }) =
           <TableRow
             item={item}
             handleDelete={handleDelete}
+            handleInput={handleInput}
+            handleUpdate={handleUpdate}
+            error={errors}
           />
         );
       }) : '' }

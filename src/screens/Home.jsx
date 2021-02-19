@@ -50,7 +50,6 @@ const Home = () => {
       asin: '1236345',
     },
   ]);
-  // const [rows, setRows] = useState([]);
   const [inputs, setInputs] = useState({
     name: '',
     category: '',
@@ -66,6 +65,20 @@ const Home = () => {
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
+  };
+
+  const handleUpdate = (e, key, id) => {
+    let newRows = Array.from(rows);
+
+    const newData = newRows.map(row => {
+      if (row.id !== id) {
+        return row;
+      }
+
+      return { ...row, [key]: e.target.value };
+    });
+
+    setRows(newData)
   };
 
   const handleValidation = (inputs) => {
@@ -143,6 +156,7 @@ const Home = () => {
         handleInput={handleInput}
         handleSubmit={handleSubmit}
         handleDelete={handleDelete}
+        handleUpdate={handleUpdate}
         errors={errors}
       />
     </>
