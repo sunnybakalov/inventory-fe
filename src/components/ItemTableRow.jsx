@@ -88,7 +88,7 @@ const TableRow = ({ error, handleDelete, handleUpdate, item }) => {
         </TableData>
         <TableData>
           <button onClick={(() => handleEdit(item))}>
-            Edit
+            { editing ? "Update" : "Edit" }
           </button>
         </TableData>
     </Row>

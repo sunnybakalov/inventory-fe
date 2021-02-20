@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
-import styled from 'styled-components';
 import ItemsTable from '../components/ItemsTable';
-import { SubmitButton } from '../components/Buttons';
 
 const Home = () => {
   const [rows, setRows] = useState([
@@ -61,7 +59,6 @@ const Home = () => {
     asin: '',
   });
   const [errors, setErrors] = useState({});
-  const [isEditing, setIsEditing] = useState(false);
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
