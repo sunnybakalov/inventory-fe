@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ItemsTable from '../components/ItemsTable';
+import { fetchAll } from '../lib/client';
 
 const Home = () => {
   const [rows, setRows] = useState([
@@ -59,6 +60,10 @@ const Home = () => {
     asin: '',
   });
   const [errors, setErrors] = useState({});
+
+  async function getAll() {
+    return await fetchAll();
+  };
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
@@ -148,6 +153,7 @@ const Home = () => {
         <h1>Inventory</h1>
       </nav>
       <h3>Add New Item</h3>
+      {getAll()}
       <ItemsTable
         rows={rows}
         handleInput={handleInput}

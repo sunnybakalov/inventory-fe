@@ -1,4 +1,4 @@
-const API_HOST = 'http://localhost:4000';
+const API_HOST = 'http://localhost:4005';
 
 const get = async (endpoint) => {
   try {
@@ -10,4 +10,13 @@ const get = async (endpoint) => {
   } catch (err) {
     return err;
   }
+};
+
+export const fetchAll = async () => {
+  try {
+    const response = await get('/fetch-all');
+    console.log("RES", response)
+  } catch (err) {
+    return { error: err };
+  };
 };
