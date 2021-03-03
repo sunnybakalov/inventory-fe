@@ -1,54 +1,55 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ItemsTable from '../components/ItemsTable';
 import { fetchAll } from '../lib/client';
 
 const Home = () => {
-  const [rows, setRows] = useState([
-    {
-      id: 1,
-      name: 'hello',
-      category: 'asdf',
-      price: '$12.12',
-      source: 'walmart',
-      quantity: '4',
-      comments: 'Hello my name is',
-      breakeven: '$15.14',
-      asin: '1236345',
-    },
-    {
-      id: 2,
-      name: 'world',
-      category: 'asdf',
-      price: '$12.12',
-      source: 'walmart',
-      quantity: '4',
-      comments: 'Hello my name is',
-      breakeven: '$15.14',
-      asin: '1236345',
-    },
-    {
-      id: 3,
-      name: 'my',
-      category: 'asdf',
-      price: '$12.12',
-      source: 'walmart',
-      quantity: '4',
-      comments: 'Hello my name is',
-      breakeven: '$15.14',
-      asin: '1236345',
-    },
-    {
-      id: 4,
-      name: 'name',
-      category: 'asdf',
-      price: '$12.12',
-      source: 'walmart',
-      quantity: '4',
-      comments: 'Hello my name is',
-      breakeven: '$15.14',
-      asin: '1236345',
-    },
-  ]);
+  // const [rows, setRows] = useState([
+  //   {
+  //     id: 1,
+  //     name: 'hello',
+  //     category: 'asdf',
+  //     price: '$12.12',
+  //     source: 'walmart',
+  //     quantity: '4',
+  //     comments: 'Hello my name is',
+  //     breakeven: '$15.14',
+  //     asin: '1236345',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'world',
+  //     category: 'asdf',
+  //     price: '$12.12',
+  //     source: 'walmart',
+  //     quantity: '4',
+  //     comments: 'Hello my name is',
+  //     breakeven: '$15.14',
+  //     asin: '1236345',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'my',
+  //     category: 'asdf',
+  //     price: '$12.12',
+  //     source: 'walmart',
+  //     quantity: '4',
+  //     comments: 'Hello my name is',
+  //     breakeven: '$15.14',
+  //     asin: '1236345',
+  //   },
+  //   {
+  //     id: 4,
+  //     name: 'name',
+  //     category: 'asdf',
+  //     price: '$12.12',
+  //     source: 'walmart',
+  //     quantity: '4',
+  //     comments: 'Hello my name is',
+  //     breakeven: '$15.14',
+  //     asin: '1236345',
+  //   },
+  // ]);
+  const [rows, setRows] = useState([]);
   const [inputs, setInputs] = useState({
     name: '',
     category: '',
@@ -61,9 +62,16 @@ const Home = () => {
   });
   const [errors, setErrors] = useState({});
 
-  async function getAll() {
-    return await fetchAll();
-  };
+  useEffect(() => {
+    console.log("useEFFECT IS CALLED")
+    async function fetch() {
+      return await fetchAll();
+    }
+    fetch().then((res) => {
+      setRows(res);
+      // console.log("RES", res)
+    });
+  }, []);
 
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
@@ -151,9 +159,8 @@ const Home = () => {
     <>
       <nav>
         <h1>Inventory</h1>
-      </nav>
+      </nav> 
       <h3>Add New Item</h3>
-      {getAll()}
       <ItemsTable
         rows={rows}
         handleInput={handleInput}

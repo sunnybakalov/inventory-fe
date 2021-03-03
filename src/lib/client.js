@@ -15,7 +15,7 @@ const get = async (endpoint) => {
 export const fetchAll = async () => {
   try {
     const response = await get('/fetch-all');
-    console.log("RES", response)
+    return response;
   } catch (err) {
     return { error: err };
   };
