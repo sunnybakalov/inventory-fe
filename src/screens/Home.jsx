@@ -63,13 +63,11 @@ const Home = () => {
   const [errors, setErrors] = useState({});
 
   useEffect(() => {
-    console.log("useEFFECT IS CALLED")
     async function fetch() {
       return await fetchAll();
     }
     fetch().then((res) => {
       setRows(res);
-      // console.log("RES", res)
     });
   }, []);
 

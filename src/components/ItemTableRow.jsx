@@ -12,7 +12,6 @@ const TableRow = ({ error, handleDelete, handleUpdate, item }) => {
 
   return (
     <Row>
-      {console.log("ITEM", item)}
       <TableData>
         <Input
           value={item.name}
