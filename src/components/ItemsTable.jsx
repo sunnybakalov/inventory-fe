@@ -5,12 +5,13 @@ import {
   Input,
   InputDiv,
   Row,
+  Select,
   Table,
   TableData,
   TableHeading
 } from '../components/styles';
 
-const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, handleUpdate, rows }) => {
+const ItemsTable = ({ categories, errors, handleDelete, handleInput, handleSubmit, handleUpdate, rows }) => {
 
   return (
     <Table>
@@ -40,10 +41,15 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, handleUpd
         </TableData>
         <TableData>
           <InputDiv>
-            <Input
+            <Select
               onChange={e => handleInput(e, 'category')}
               error={ errors.category ? true : false }
-              />
+              options={categories}
+            >
+              {categories.map(cat => {
+                <option>{cat}</option>
+              })}
+            </Select>
             {errors.category &&
               <span>{errors.category}</span>
             }
@@ -106,6 +112,7 @@ const ItemsTable = ({ errors, handleDelete, handleInput, handleSubmit, handleUpd
       {rows ? rows.map(item => {
         return (
           <TableRow
+            categories={categories}
             item={item}
             handleDelete={handleDelete}
             handleInput={handleInput}

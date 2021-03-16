@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemsTable from '../components/ItemsTable';
-import { fetchAll } from '../lib/client';
+import { fetchAll, fetchCategories, deleteItem } from '../lib/client';
 
 const Home = () => {
   // const [rows, setRows] = useState([
@@ -50,6 +50,7 @@ const Home = () => {
   //   },
   // ]);
   const [rows, setRows] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [inputs, setInputs] = useState({
     name: '',
     category: '',
@@ -143,8 +144,9 @@ const Home = () => {
     }
   };
 
-  const handleDelete = (item) => {
-    const filtered = rows.filter((row) => row.id !== item.id);
+  const handleDelete = async (id) => {
+    const del = await deleteItem(id);
+    const filtered = rows.filter((row) => row.id !== id);
     setRows(filtered);
   };
 
@@ -160,6 +162,7 @@ const Home = () => {
       </nav> 
       <h3>Add New Item</h3>
       <ItemsTable
+        categories={categories}
         rows={rows}
         handleInput={handleInput}
         handleSubmit={handleSubmit}

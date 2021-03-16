@@ -54,3 +54,19 @@ export const InputDiv = styled.div`
     font-size: 10px;
   }
 `;
+
+export const Select = styled.select`
+  height: 30px;
+  max-width: 150px;
+  border: ${props => inputBorderColor(props)};
+  border-radius: 4px;
+  background-color: #ffffff;
+  
+  &:focus {
+    outline: 0;
+    border-color: #4C76E0;
+  }
+  &::placeholder {
+    color: #333;
+  }
+`;
