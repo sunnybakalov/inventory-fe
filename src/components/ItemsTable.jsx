@@ -43,11 +43,10 @@ const ItemsTable = ({ categories, errors, handleDelete, handleInput, handleSubmi
           <InputDiv>
             <Select
               onChange={e => handleInput(e, 'category')}
-              error={ errors.category ? true : false }
-              options={categories}
+              // options={categories}
             >
               {categories.map(cat => {
-                <option>{cat}</option>
+                return <option value={cat}>{cat}</option>
               })}
             </Select>
             {errors.category &&

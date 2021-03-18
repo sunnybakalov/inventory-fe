@@ -52,6 +52,16 @@ export const fetchCategories = async () => {
   };
 };
 
+export const createItem = async (item) => {
+  try {
+    console.log("ITEM", item)
+    const response = await post('/create-item', item);
+    return response;
+  } catch (err) {
+    return { error: err }
+  };
+};
+
 export const updateItem = async (item) => {
   try {
     console.log("ITEM", item)

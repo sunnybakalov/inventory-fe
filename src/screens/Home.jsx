@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import ItemsTable from '../components/ItemsTable';
-import { fetchAll, fetchCategories, deleteItem } from '../lib/client';
+import { createItem, deleteItem, fetchAll, fetchCategories } from '../lib/client';
 
 const Home = () => {
   // const [rows, setRows] = useState([
@@ -72,6 +72,16 @@ const Home = () => {
     });
   }, []);
 
+  useEffect(() => {
+    async function fetch() {
+      return await fetchCategories();
+    }
+    fetch().then((res) => {
+      const categoryNames = res.map(cat => cat.name)
+      setCategories(categoryNames);
+    });
+  }, []);
+
   const handleInput = (e, key) => {
     setInputs({ ...inputs, [key]: e.target.value });
   };
@@ -97,9 +107,6 @@ const Home = () => {
     if (!inputs.name) {
       inputErrors.name = 'Please enter an item name.';
     }
-    if (!inputs.category) {
-      inputErrors.category = 'Please enter a category.';
-    }
     if (!inputs.price) {
       inputErrors.price = 'Please enter an item price.';
     }
@@ -114,23 +121,22 @@ const Home = () => {
     return inputErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const inputErrors = handleValidation(inputs);
     const hasErrors = Object.keys(inputErrors).length !== 0;
 
-    console.log('INPUT ERRORS', inputErrors);
     if (hasErrors) {
       setErrors(inputErrors);
     } else {
       setErrors({
         name: '',
-        category: '',
         price: '',
         source: '',
         quantity: '',
       });
       addRow(inputs);
+      await createItem(inputs);
       setInputs({
         name: '',
         category: '',

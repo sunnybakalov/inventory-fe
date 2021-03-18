@@ -33,10 +33,9 @@ const TableRow = ({ categories, error, handleDelete, handleUpdate, item }) => {
             disabled={disabled}
             id={item.id}
             onChange={e => handleUpdate(e, 'category', item.id)}
-            error={ error.category ? true : false }
           >
             {categories.map(cat => {
-              <option>{cat}</option>
+              return <option>{cat}</option>
             })}
           </Select>
         </TableData>
