@@ -1,7 +1,7 @@
 import React from 'react';
-import { SubmitButton } from '../components/Buttons';
 import TableRow from '../components/ItemTableRow';
 import {
+  Button,
   Input,
   InputDiv,
   Row,
@@ -24,7 +24,6 @@ const ItemsTable = ({ categories, errors, handleDelete, handleInput, handleSubmi
         <TableHeading>Comments</TableHeading>
         <TableHeading>Breakeven</TableHeading>
         <TableHeading>ASIN</TableHeading>
-        <TableHeading></TableHeading>
         <TableHeading></TableHeading>
       </Row>
       <Row>
@@ -103,9 +102,9 @@ const ItemsTable = ({ categories, errors, handleDelete, handleInput, handleSubmi
           </InputDiv>
         </TableData>
         <TableData>
-          <SubmitButton onClick={handleSubmit}>
+          <Button onClick={handleSubmit} status="submit">
             Submit
-          </SubmitButton>
+          </Button>
         </TableData>
       </Row>
       {rows ? rows.map(item => {

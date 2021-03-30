@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Input, Row, Select, TableData } from '../components/styles';
+import { Button, Input, Row, Select, TableData } from '../components/styles';
 import { updateItem } from '../lib/client';
 
 const TableRow = ({ categories, error, handleDelete, handleUpdate, item }) => {
@@ -35,7 +35,7 @@ const TableRow = ({ categories, error, handleDelete, handleUpdate, item }) => {
             onChange={e => handleUpdate(e, 'category', item.id)}
           >
             {categories.map(cat => {
-              return <option>{cat}</option>
+              return <option value={cat}>{cat}</option>
             })}
           </Select>
         </TableData>
@@ -91,22 +91,23 @@ const TableRow = ({ categories, error, handleDelete, handleUpdate, item }) => {
           />
         </TableData>
         <TableData>
-          <button
+          <Button
+            status="delete"
             onClick={((e) => handleDelete(item.id))}
           >
             Delete
-          </button>
+          </Button>
         </TableData>
         <TableData>
           {!editing &&
-            <button onClick={(() => handleEdit())}>
+            <Button onClick={(() => handleEdit())}>
               Edit
-            </button>
+            </Button>
           }
           {editing &&
-            <button onClick={(() => handleSubmitUpdatedItem(item))}>
+            <Button onClick={(() => handleSubmitUpdatedItem(item))} status='submit'>
               Update
-            </button>
+            </Button>
           }
         </TableData>
     </Row>

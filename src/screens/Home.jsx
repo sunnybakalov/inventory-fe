@@ -1,54 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import ItemsTable from '../components/ItemsTable';
 import { createItem, deleteItem, fetchAll, fetchCategories } from '../lib/client';
+import { Heading } from '../components/styles';
 
 const Home = () => {
-  // const [rows, setRows] = useState([
-  //   {
-  //     id: 1,
-  //     name: 'hello',
-  //     category: 'asdf',
-  //     price: '$12.12',
-  //     source: 'walmart',
-  //     quantity: '4',
-  //     comments: 'Hello my name is',
-  //     breakeven: '$15.14',
-  //     asin: '1236345',
-  //   },
-  //   {
-  //     id: 2,
-  //     name: 'world',
-  //     category: 'asdf',
-  //     price: '$12.12',
-  //     source: 'walmart',
-  //     quantity: '4',
-  //     comments: 'Hello my name is',
-  //     breakeven: '$15.14',
-  //     asin: '1236345',
-  //   },
-  //   {
-  //     id: 3,
-  //     name: 'my',
-  //     category: 'asdf',
-  //     price: '$12.12',
-  //     source: 'walmart',
-  //     quantity: '4',
-  //     comments: 'Hello my name is',
-  //     breakeven: '$15.14',
-  //     asin: '1236345',
-  //   },
-  //   {
-  //     id: 4,
-  //     name: 'name',
-  //     category: 'asdf',
-  //     price: '$12.12',
-  //     source: 'walmart',
-  //     quantity: '4',
-  //     comments: 'Hello my name is',
-  //     breakeven: '$15.14',
-  //     asin: '1236345',
-  //   },
-  // ]);
   const [rows, setRows] = useState([]);
   const [categories, setCategories] = useState([]);
   const [inputs, setInputs] = useState({
@@ -68,7 +23,10 @@ const Home = () => {
       return await fetchAll();
     }
     fetch().then((res) => {
-      setRows(res);
+      let sorted = res.sort((item1, item2) => {
+        return item1.category > item2.category ? 1 : -1
+      });
+      setRows(sorted);
     });
   }, []);
 
@@ -138,14 +96,6 @@ const Home = () => {
       addRow(inputs);
       await createItem(inputs);
       setInputs({
-        name: '',
-        category: '',
-        price: '',
-        source: '',
-        quantity: '',
-        comments: '',
-        breakeven: '',
-        asin: '',
       });
     }
   };
@@ -164,9 +114,8 @@ const Home = () => {
   return (
     <>
       <nav>
-        <h1>Inventory</h1>
+        <Heading>Inventory Management</Heading>
       </nav> 
-      <h3>Add New Item</h3>
       <ItemsTable
         categories={categories}
         rows={rows}
